@@ -1,34 +1,21 @@
 source 'http://rubygems.org'
 
-gem 'sqlite3'
-
-group :development do
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
-  gem 'libnotify'
-end
-
-group :test do
-  gem 'autotest'
-  gem 'rspec-rails', '= 2.6.1'
-  gem 'factory_girl'
-  gem 'faker'
-end
-
-group :cucumber do
-  gem 'cucumber-rails', '1.0.0'
-  gem 'database_cleaner', '= 0.6.7'
-  gem 'nokogiri'
-  gem 'capybara', '1.0.1'
-end
-
-if RUBY_VERSION < "1.9"
-  gem "ruby-debug"
-else
-  gem "ruby-debug19"
-end
+gem 'guard'
+gem 'guard-rspec'
+gem 'rb-inotify', :require => false
+gem 'rb-fsevent', :require => false
+gem 'rb-fchange', :require => false
+gem 'libnotify'
+gem 'database_cleaner'
+gem 'rspec-rails'
+gem 'fuubar'
+gem 'debugger'
+gem 'pry-rails'
+gem 'factory_girl_rails', '~> 1.7.0'
+gem 'faker'
+gem 'pry'
+gem 'pry-debugger'
+gem 'pry-rescue'
+gem 'spree_core', '~> 1.3.0'
 
 gemspec
