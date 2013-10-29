@@ -11,5 +11,5 @@ Spree::ProductsController.class_eval do
     end
   end
 
-  caches_page :index, :if => Proc.new {|c| c.request.format.rss? }
+  caches_page :index, :if => Proc.new {|c| c.request.format.rss? }, :expires_in => 1.days
 end
