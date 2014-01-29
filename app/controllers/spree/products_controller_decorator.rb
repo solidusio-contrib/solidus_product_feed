@@ -6,10 +6,10 @@ Spree::ProductsController.class_eval do
     if request.format.rss?
       @products = Spree::Product.all
       respond_to do |format|
-        format.rss
+        format.rss { render 'spree/products/index.rss', :layout => false }
       end
     end
   end
 
-  caches_page :index, :if => Proc.new {|c| c.request.format.rss? }, :expires_in => 1.days
+  # caches_page :index, :if => Proc.new {|c| c.request.format.rss? }, :expires_in => 1.days
 end
