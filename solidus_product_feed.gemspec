@@ -1,8 +1,13 @@
 # encoding: UTF-8
+lib = File.expand_path('../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
+require 'solidus_product_feed/version'
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_product_feed'
-  s.version     = '1.3.0'
+  s.version     = SolidusProductFeed::VERSION
   s.summary     = 'Spree extension that provides an RSS feed for products'
   s.description = 'A Spree extension that provides an RSS feed for products, with Google Shopper extensions'
   s.required_ruby_version = '>= 1.8.7'
