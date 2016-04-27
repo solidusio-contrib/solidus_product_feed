@@ -4,10 +4,6 @@ Solidus Product Feed
 An extension that provides an RSS feed for products. Google Shopper attributes are also implemented.
 An RSS link is automatically appended to the `<head>` tag in the `layouts/spree_application` file.
 
-Supported versions of Spree
-=========
-
-any version of Spree higher than 0.70.x 
 
 Installation
 ===============
