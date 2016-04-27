@@ -1,4 +1,4 @@
-Spree Product Feed
+Solidus Product Feed
 ================
 
 An extension that provides an RSS feed for products. Google Shopper attributes are also implemented.
@@ -14,7 +14,7 @@ Installation
 
 1) add the gem to your `Gemfile`:
 
-`gem 'spree_product_feed'`
+`gem 'solidus_product_feed'`
 
 2) run bundler:
 
