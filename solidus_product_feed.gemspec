@@ -1,7 +1,7 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_product_feed'
+  s.name        = 'solidus_product_feed'
   s.version     = '1.3.0'
   s.summary     = 'Spree extension that provides an RSS feed for products'
   s.description = 'A Spree extension that provides an RSS feed for products, with Google Shopper extensions'

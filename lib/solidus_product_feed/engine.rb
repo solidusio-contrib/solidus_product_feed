@@ -1,6 +1,6 @@
-module SpreeProductFeed
+module SolidusProductFeed
   class Engine < Rails::Engine
-    engine_name 'spree_product_feed'
+    engine_name 'solidus_product_feed'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
