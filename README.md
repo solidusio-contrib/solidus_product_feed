@@ -1,20 +1,18 @@
-Spree Product Feed
+Solidus Product Feed
 ================
+
+[![Build Status](https://travis-ci.org/solidusio-contrib/solidus_product_feed.svg?branch=master)](https://travis-ci.org/solidusio-contrib/solidus_product_feed)
 
 An extension that provides an RSS feed for products. Google Shopper attributes are also implemented.
 An RSS link is automatically appended to the `<head>` tag in the `layouts/spree_application` file.
 
-Supported versions of Spree
-=========
-
-any version of Spree higher than 0.70.x 
 
 Installation
 ===============
 
 1) add the gem to your `Gemfile`:
 
-`gem 'spree_product_feed'`
+`gem 'solidus_product_feed'`
 
 2) run bundler:
 
