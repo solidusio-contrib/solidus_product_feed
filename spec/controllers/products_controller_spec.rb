@@ -6,6 +6,8 @@ describe Spree::ProductsController, type: :controller do
 
     it { is_expected.to have_http_status :ok }
 
+    it { is_expected.to render_template 'spree/products/index' }
+
     it 'returns the correct content type' do
       subject
       expect(response.content_type).to eq 'application/rss+xml'
