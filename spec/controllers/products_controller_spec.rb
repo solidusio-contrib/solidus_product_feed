@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::ProductsController, type: :controller do
   context "GET #index" do
-    subject { get :index, format: 'rss', use_route: :spree}
+    subject { get :index, format: 'rss', use_route: :spree }
 
     it { is_expected.to have_http_status :ok }
 
