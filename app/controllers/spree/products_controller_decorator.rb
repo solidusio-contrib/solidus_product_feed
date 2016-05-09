@@ -1,15 +1,15 @@
-Spree::ProductsController.class_eval do
-  respond_to :rss, :only => [:index]
-  before_filter :check_rss, only: :index
+Spree::ProductsController.prepend Module.new do
+  def self.prepended(klass)
+    klass.respond_to :rss, only: :index
+    klass.before_filter :check_rss, only: :index
+  end
 
   def check_rss
     if request.format.rss?
       @products = Spree::Product.all
       respond_to do |format|
-        format.rss { render 'spree/products/index.rss', :layout => false }
+        format.rss { render 'spree/products/index.rss', layout: false }
       end
     end
   end
-
-  # caches_page :index, :if => Proc.new {|c| c.request.format.rss? }, :expires_in => 1.days
 end
