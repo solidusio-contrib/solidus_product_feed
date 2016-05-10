@@ -16,14 +16,19 @@ RSpec.describe Spree::FeedProduct do
     end
   end
 
+  describe "#category" do
+    subject { feed_product.category }
+    it { is_expected.to be_nil }
+  end
+
   describe "#condition" do
     subject { feed_product.condition }
-    it { is_expected.to eq "retail" }
+    it { is_expected.to eq "new" }
   end
 
   describe "#price" do
     subject { feed_product.price }
-    it { is_expected.to eq "19.99" }
+    it { is_expected.to eq Spree::Money.new(19.99, currency: 'USD') }
   end
 
   describe "#image_link" do
@@ -36,12 +41,6 @@ RSpec.describe Spree::FeedProduct do
     context "when the product doesn't have images" do
       it { is_expected.to be_nil }
     end
-  end
-
-  describe "#published_at" do
-    subject { feed_product.published_at }
-    before { product.update_column :available_on, DateTime.new(0) }
-    it { is_expected.to eq "Thu, 01 Jan 0000 00:00:00 +0000" }
   end
 
   describe "#description" do
