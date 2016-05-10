@@ -23,6 +23,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'solidus_core', ["~> 1.0"]
   s.add_runtime_dependency 'solidus_backend', ["~> 1.0"]
 
-  s.add_development_dependency 'rspec-rails',  '~> 3.4'
+  s.add_development_dependency 'rspec-rails', '~> 3.4'
+  s.add_development_dependency 'rubocop', '~> 0.39.0'
+  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'faker'
   s.add_development_dependency 'sqlite3'
 end

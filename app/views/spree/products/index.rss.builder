@@ -1,27 +1,26 @@
-xml.instruct! :xml, :version=>"1.0"
-xml.rss(:version=>"2.0", "xmlns:g" => "http://base.google.com/ns/1.0"){
-  xml.channel{
-    xml.title(current_store.name)
-    xml.link("http://#{current_store.url}")
-    xml.description("Find out about new products on http://#{current_store.url} first!")
-    xml.language('en-us')
-    @products.each do |product|
+xml.instruct! :xml, version: "1.0"
+
+xml.rss version: "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
+  xml.channel do
+    xml.title current_store.name
+    xml.link "http://#{current_store.url}"
+    xml.description "Find out about new products on http://#{current_store.url} first!"
+    xml.language 'en-us'
+
+    @feed_products.each do |feed_product|
       xml.item do
-        xml.title(product.name)
-        xml.description((product.images.count > 0 ? link_to(image_tag(product.images.first.attachment.url(:product)), product_url(product)) : '') + simple_format(product.description))
-        xml.author(current_store.url)
-        xml.pubDate((product.available_on || product.created_at).strftime("%a, %d %b %Y %H:%M:%S %z"))
-        xml.link(product_url(product))
-        xml.guid(product.id)
+        xml.link product_url(feed_product.product)
+        xml.author current_store.url
 
-        if product.images.count > 0
-          xml.tag!('g:image_link', product.images.first.attachment.url(:large))
-        end
-
-        xml.tag!('g:price', product.price)
-        xml.tag!('g:condition', 'retail')
-        xml.tag!('g:id', product.id)
+        xml.title feed_product.title
+        xml.description feed_product.description
+        xml.pubDate feed_product.published_at
+        xml.guid feed_product.id
+        xml.tag! 'g:id', feed_product.id
+        xml.tag! 'g:image_link', feed_product.image_link
+        xml.tag! 'g:price', feed_product.price
+        xml.tag! 'g:condition', feed_product.condition
       end
     end
-  }
-}
+  end
+end
