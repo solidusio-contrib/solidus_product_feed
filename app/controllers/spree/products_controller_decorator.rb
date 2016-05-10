@@ -1,15 +1,18 @@
 Spree::ProductsController.prepend(Module.new do
-  def self.prepended(klass)
-    klass.respond_to :rss, only: :index
-    klass.before_filter :check_rss, only: :index
+  class << self
+    def prepended(klass)
+      klass.respond_to :rss, only: :index
+    end
   end
 
-  def check_rss
-    if request.format.rss?
-      @feed_products = Spree::Product.all.map(&Spree::FeedProduct.method(:new))
-      respond_to do |format|
-        format.rss { render 'spree/products/index.rss', layout: false }
-      end
-    end
+  def index
+    load_feed_products if request.format.rss?
+    super
+  end
+
+  private
+
+  def load_feed_products
+    @feed_products = Spree::Product.all.map(&Spree::FeedProduct.method(:new))
   end
 end)
