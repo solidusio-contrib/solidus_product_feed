@@ -4,6 +4,7 @@ require File.expand_path("../dummy/config/environment.rb", __FILE__)
 require 'rspec/rails'
 require 'factory_girl_rails'
 require 'pry'
+require 'faker' # Required for factories.
 require 'spree/testing_support/factories'
 require 'spree/testing_support/controller_requests'
 
