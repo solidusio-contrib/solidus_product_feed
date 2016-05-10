@@ -2,7 +2,11 @@ require "spec_helper"
 
 RSpec.describe Spree::FeedProduct do
   let(:feed_product) { described_class.new(product) }
-  let(:product) { create :product, name: "2 Hams 20 Dollars" }
+  let(:product) do
+    create :product,
+      name: "2 Hams 20 Dollars",
+      description: "As seen on TV!"
+  end
 
   describe "#id" do
     subject { feed_product.id }
