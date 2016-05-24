@@ -7,7 +7,7 @@ module Spree
     end
 
     def id
-      product.id
+      product.sku.blank? ? product.id : product.sku
     end
 
     def title

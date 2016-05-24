@@ -11,8 +11,16 @@ RSpec.describe Spree::FeedProduct do
   describe "#id" do
     subject { feed_product.id }
 
-    it "delegates to the product's SKU" do
-      expect(subject).to eq product.id
+    context "when the product a SKU" do
+      let(:product) { create(:product, sku: 'LEGIT-5K00') }
+      it { is_expected.to eq 'LEGIT-5K00' }
+    end
+
+    context "when the product doesn't have a SKU" do
+      let(:product) { create(:product, sku: "") }
+      it "delegates to the product's id" do
+        expect(subject).to eq product.id
+      end
     end
   end
 
