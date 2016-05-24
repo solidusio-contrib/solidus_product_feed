@@ -60,4 +60,10 @@ RSpec.describe Spree::FeedProduct do
     subject { feed_product.title }
     it { is_expected.to eq "2 Hams 20 Dollars" }
   end
+
+  describe "#shipping_weight" do
+    let(:product) { create(:product, weight: 5) }
+    subject { feed_product.shipping_weight }
+    it { is_expected.to eq "5.0 lbs" }
+  end
 end

@@ -35,5 +35,9 @@ module Spree
       return unless product.images.any?
       product.images.first.attachment.url(:large)
     end
+
+    def shipping_weight
+      "#{product.weight} lbs"
+    end
   end
 end
