@@ -61,6 +61,11 @@ RSpec.describe Spree::FeedProduct do
     it { is_expected.to eq "2 Hams 20 Dollars" }
   end
 
+  describe "#availability_date" do
+    subject { feed_product.availability_date }
+    it { is_expected.to be_nil }
+  end
+
   describe "#shipping_weight" do
     let(:product) { create(:product, weight: 5) }
     subject { feed_product.shipping_weight }
