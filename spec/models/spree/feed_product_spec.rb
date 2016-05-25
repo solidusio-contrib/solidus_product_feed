@@ -66,6 +66,30 @@ RSpec.describe Spree::FeedProduct do
     it { is_expected.to be_nil }
   end
 
+  describe "#availability" do
+    subject { feed_product.availability }
+
+    context "when the product is available for preorder" do
+      before do
+        feed_product.stub(:availability_date).and_return("2014-12-25T13:00-0800")
+      end
+
+      it { is_expected.to eq "preorder" }
+    end
+
+    context "when the product is out of stock" do
+      it { is_expected.to eq "out of stock" }
+    end
+
+    context "when the product is in stock" do
+      before do
+        product.master.stock_items.first.set_count_on_hand(5)
+      end
+
+      it { is_expected.to eq "in stock" }
+    end
+  end
+
   describe "#shipping_weight" do
     let(:product) { create(:product, weight: 5) }
     subject { feed_product.shipping_weight }

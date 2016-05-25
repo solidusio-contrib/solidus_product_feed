@@ -27,6 +27,16 @@ module Spree
       "new"
     end
 
+    def availability
+      if availability_date
+        'preorder'
+      elsif product.variants_including_master.any?(&:in_stock?)
+        'in stock'
+      else
+        'out of stock'
+      end
+    end
+
     # If you are accepting orders for products that are available for preorder,
     # use this attribute to indicate when the product becomes available for delivery.
     # ISO 8601 eg: 2014-12-25T13:00-0800
