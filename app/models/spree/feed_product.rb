@@ -52,6 +52,11 @@ module Spree
       product.images.first.attachment.url(:large)
     end
 
+    def additional_image_links
+      product.images.drop(1).
+        map { |i| i.attachment.url(:large) }
+    end
+
     def shipping_weight
       "#{product.weight} lbs"
     end

@@ -15,6 +15,9 @@ xml.rss version: "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
         xml.category feed_product.category if feed_product.category
         xml.link product_url(feed_product.product)
         xml.tag! 'g:image_link', feed_product.image_link
+        feed_product.additional_image_links.map do |uri|
+          xml.tag!('g:g:additional_image_link', uri)
+        end
         xml.tag! 'g:condition', feed_product.condition
         xml.tag! 'g:price', feed_product.price.money.format(symbol: false, with_currency: true)
         xml.tag!('g:availability', feed_product.availability)

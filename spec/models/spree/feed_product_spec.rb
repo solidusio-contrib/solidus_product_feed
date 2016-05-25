@@ -51,6 +51,26 @@ RSpec.describe Spree::FeedProduct do
     end
   end
 
+  describe "#additional_image_links" do
+    subject { feed_product.additional_image_links }
+
+    context "when the product doesn't have images" do
+      it { is_expected.to eq [] }
+    end
+
+    context "when the product has one image" do
+      before { Spree::Image.create! viewable: product.master, attachment_file_name: 'hams.png' }
+      it { is_expected.to eq [] }
+    end
+
+    context "when the product has more than one image" do
+      before { Spree::Image.create! viewable: product.master, attachment_file_name: 'hams.png' }
+      before { Spree::Image.create! viewable: product.master, attachment_file_name: '2hams.png' }
+      before { binding.pry }
+      it { is_expected.to eq ['/spree/products/2/large/2hams.png'] }
+    end
+  end
+
   describe "#description" do
     subject { feed_product.description }
     it { is_expected.to eq "As seen on TV!" }
