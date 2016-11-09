@@ -124,14 +124,13 @@ module Spree
 
     # Gives the formatted price of shipping for the product
     #
-    # @return [String] the minimum shipping estimated for this product.
+    # @return [String] the minimum shipping available for this product.
     def shipping_price
-      @shipping_price ||= Spree::Money.new(@product
-        .shipping_category
-        .shipping_methods
-        .sort_by(&:max_estimate)
+      @shipping_rate ||= @product.shipping_category.shipping_methods
+        .flat_map(&:shipping_rates)
+        .sort_by(&:cost)
         .first
-        .min_estimate)
+      @shipping_price ||= Spree::Money.new(@shipping_rate.cost)
       @shipping_price.money.format(symbol: false, with_currency: true)
     end
 

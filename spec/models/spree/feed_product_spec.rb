@@ -6,6 +6,19 @@ RSpec.describe Spree::FeedProductPresenter do
       name: "2 Hams 20 Dollars",
       description: "As seen on TV!"
   end
+
+  let!(:shipping_method_1) { create :shipping_method }
+  let!(:cheapest_shipping_method) { create :free_shipping_method }
+  let!(:shipping_rate_1) do
+    create :shipping_rate, cost: 11.1, shipping_method: shipping_method_1
+  end
+  let!(:shipping_rate_2) do
+    create :shipping_rate, cost: 22.2, shipping_method: shipping_method_1
+  end
+  let!(:cheapest_shipping_rate) do
+    create :shipping_rate, cost: 0.0, shipping_method: cheapest_shipping_method
+  end
+
   let!(:category_property) { create :property,
                              name: 'google_product_category',
                              presentation: 'Google Product Category' }
@@ -81,6 +94,14 @@ RSpec.describe Spree::FeedProductPresenter do
     context "when parent is nil" do
       subject { feed_product.send :scoped_name, nil, :price }
       it { is_expected.to eq :price }
+    end
+  end
+
+  describe "#shipping_price" do
+    subject { feed_product.send :shipping_price }
+    it "selects the cheapest shipping rate" do
+      expect(subject).to eq(Spree::Money.new(cheapest_shipping_rate.cost)
+        .money.format(symbol: false, with_currency: true))
     end
   end
 
