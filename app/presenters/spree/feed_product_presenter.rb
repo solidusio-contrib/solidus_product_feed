@@ -167,14 +167,9 @@ module Spree
 
     # Computes the availability status of the product
     # @return [String] the availability status of the product.
-    #   One of `in stock`, `out of stock`, `preorder.
+    #   One of `in stock`, `out of stock`.
     def availability
-      if @product.available_on > Time.now
-        'preorder'
-      else
-        has_stock = @product.stock_items.any? { |si| si.count_on_hand > 0 }
-        has_stock ? 'in stock' : 'out of stock'
-      end
+      @product.stock_items.any?(&:available?) ? 'in stock' : 'out of stock'
     end
 
     # Returns the most frequently used tax rate for this item. If no tax rate
