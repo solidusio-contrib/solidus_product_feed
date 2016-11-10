@@ -69,7 +69,8 @@ module Spree
     # @return [Array <String>] the tag name and content for an
     #   xml tag.
     def tag_params_for datum
-      ["g:#{datum.to_s}", self.send(datum)]
+      tag = datum.to_s.split("_").last
+      ["g:#{tag}", self.send(datum)]
     end
 
     # Recursively produces xml tags representing product for
