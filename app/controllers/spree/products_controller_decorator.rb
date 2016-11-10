@@ -13,7 +13,7 @@ Spree::ProductsController.prepend(Module.new do
   private
 
   def load_feed_products
-    @feed_products = Spree::Product.all.map do |prod|
+    @feed_products = Spree::Product.select(&:available?).map do |prod|
       Spree::FeedProductPresenter.new(view_context, prod)
     end
   end
