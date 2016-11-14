@@ -61,8 +61,17 @@ module Spree
     # @return String, the xml <item> tag and content for this product.
     def item xml
       @xml ||= xml
-      @xml.item do
-        draw(schema: schema, parent: nil)
+      valid = begin
+                draw(schema: schema, parent: nil, validate_only: true)
+              rescue SchemaError => e
+                @logger.warn { e.message }
+                false
+              end
+
+      if valid
+        @xml.item do
+          draw(schema: schema, parent: nil)
+        end
       end
     end
 
@@ -88,14 +97,18 @@ module Spree
     # @param parent [:Symbol, nil] the parent tag to nest within.
     # @return [String] the xml formatted string content for this products
     #   <item> tag
-    def draw(schema:, parent:)
+    def draw(schema:, parent:, validate_only: false)
       schema.each do |entry|
         if entry.is_a? Symbol
-          type, content = tag_params_for scoped_name(parent, entry)
-          @xml.tag! type, content
+          type, content = tag_params_for(parent, entry)
+          @xml.tag! type, content unless validate_only
         else
-          @xml.tag! "g:#{entry[:parent]}" do
+          if validate_only
             draw(**entry)
+          else
+            @xml.tag! "g:#{entry[:parent]}" do
+              draw(**entry)
+            end
           end
         end
       end
