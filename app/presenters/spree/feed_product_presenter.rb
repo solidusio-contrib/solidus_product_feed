@@ -126,13 +126,20 @@ module Spree
 
     # Gives the formatted price of shipping for the product
     #
-    # @return [String] the minimum shipping available for this product.
+    # @return [String] the configured base shipping price, or
+    #   the minimum shipping available for this product.
     def shipping_price
-      @shipping_rate ||= @product.shipping_category.shipping_methods
-        .flat_map(&:shipping_rates)
-        .sort_by(&:cost)
-        .first
-      @shipping_price ||= Spree::Money.new(@shipping_rate.cost)
+      @shipping_price ||=
+        if bsp = Rails.configuration.try(:base_shipping_price)
+          Spree::Money.new(bsp)
+        else
+          Spree::Money.new(
+            @product.shipping_category.shipping_methods
+            .flat_map(&:shipping_rates)
+            .sort_by(&:cost)
+            .first
+            .cost)
+        end
       @shipping_price.money.format(symbol: false, with_currency: true)
     end
 
