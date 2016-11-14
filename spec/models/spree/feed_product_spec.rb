@@ -227,9 +227,9 @@ RSpec.describe Spree::FeedProductPresenter do
   end
 
   describe "tag_params_for" do
-    subject { feed_product.send :tag_params_for, :price }
+    subject { feed_product.send :tag_params_for, nil, :price }
 
-    it { is_expected.to contain_exactly "g:price", feed_product.send(:price) }
+    it { is_expected.to contain_exactly("g:price", feed_product.send(:price)) }
   end
 
 end

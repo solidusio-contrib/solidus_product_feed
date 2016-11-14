@@ -64,13 +64,14 @@ module Spree
 
     # Computes the parameters for an xml tag of <datum>
     #
-    # @param datum [Symbol] the name of the xml tag
+    # @param entry [Symbol] the name of the xml tag
     #   and instance method name which computes it's contents.
+    # @param parent [Symbol] the name of the surrounding tag, or nil
+    #   if none.
     # @return [Array <String>] the tag name and content for an
     #   xml tag.
-    def tag_params_for datum
-      tag = datum.to_s.split("_").last
-      ["g:#{tag}", self.send(datum)]
+    def tag_params_for parent, entry
+      ["g:#{entry}", self.send(scoped_name(parent, entry))]
     end
 
     # Recursively produces xml tags representing product for
