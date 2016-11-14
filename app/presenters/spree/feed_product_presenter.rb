@@ -6,6 +6,7 @@ module Spree
   end
 
   class FeedProductPresenter
+    require 'logger'
     # @!attribute schema
     #   @return [Array <Symbol, Hash>] the nested schema to use in xml generation
     #
@@ -25,6 +26,8 @@ module Spree
     #   obtained from the product.properties
     def initialize(view, product, properties: nil)
 
+      @logger = Logger.new(Rails.configuration.try(:log_file) || STDERR)
+      @logger.level = Logger::WARN
       @view = view
       @product = product
       @schema = [
