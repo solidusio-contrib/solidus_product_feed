@@ -1,4 +1,10 @@
 module Spree
+  class SchemaError < StandardError
+    def initialize msg, product
+      super("Missing mandatory #{msg}. Skipping feed entry for #{product}")
+    end
+  end
+
   class FeedProductPresenter
     # @!attribute schema
     #   @return [Array <Symbol, Hash>] the nested schema to use in xml generation
@@ -112,6 +118,7 @@ module Spree
     #
     # @return [String] the products formatted price.
     def price
+      raise SchemaError.new("price") unless @product.price
       @price ||= Spree::Money.new(@product.price)
       @price.money.format(symbol: false, with_currency: true)
     end
@@ -170,7 +177,7 @@ module Spree
     #
     # @return [String, nil] a URL of an image of the product
     def image_link
-      return unless @product.images.any?
+      raise SchemaError.new("image link", @product) unless @product.images.any?
       @image_link ||= @product.images.first.attachment.url(:large)
       @image_link
     end

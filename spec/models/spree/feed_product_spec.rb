@@ -72,7 +72,9 @@ RSpec.describe Spree::FeedProductPresenter do
     end
 
     context "when the product doesn't have images" do
-      it { is_expected.to be_nil }
+      it "raises a schema error" do
+        expect { subject }.to raise_error(Spree::SchemaError)
+      end
     end
   end
 
