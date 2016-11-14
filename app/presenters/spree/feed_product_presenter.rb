@@ -166,6 +166,8 @@ module Spree
       ( brand? && (gtin? || mpn?) ) ? 'yes' : 'no'
     end
 
+    # Gives the mandatory URL of the image of the product.
+    #
     # @return [String, nil] a URL of an image of the product
     def image_link
       return unless @product.images.any?
