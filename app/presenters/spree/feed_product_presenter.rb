@@ -58,7 +58,10 @@ module Spree
     end
 
     # Creates an <item> RSS feed entry of the
-    # product, corresponding with Google's requested schema.
+    # product, corresponding with Google's requested schema. If a
+    # mandatory element of the schema is missing, a SchemaError is
+    # raised, the entire <item> entry for this product is skipped,
+    # and an error is logged to the configured log file or STDERR.
     #
     # @param xml [Builder::XmlMarkup]
     # @return String, the xml <item> tag and content for this product.
@@ -134,7 +137,7 @@ module Spree
     #
     # @return [String] the products formatted price.
     def price
-      raise SchemaError.new("price") unless @product.price
+      raise SchemaError.new("price", @product) unless @product.price
       @price ||= Spree::Money.new(@product.price)
       @price.money.format(symbol: false, with_currency: true)
     end
@@ -144,6 +147,7 @@ module Spree
     # @return [String] the uri of the product.
     def link
       @product_url ||= @view.product_url(@product)
+      raise SchemaError.new("link", @product) unless @product_url.present?
       @product_url
     end
 
@@ -163,22 +167,29 @@ module Spree
             .first
             .cost)
         end
+      raise SchemaError unless @shipping_price.present?
       @shipping_price.money.format(symbol: false, with_currency: true)
     end
 
     # @return [String] the product sku
     def id
-      @product.sku
+      @id ||= @product.sku
+      raise SchemaError.new("id", @product) unless @id
+      @id
     end
 
     # @return [String] the product name
     def title
-      @product.name
+      @title ||= @product.name
+      raise SchemaError.new("title", @product) unless @title.present?
+      @title
     end
 
     # @return [String] the product description
     def description
-      @product.description
+      @description ||= @product.description
+      raise SchemaError.new("description", @product) unless @description.present?
+      @description
     end
 
     # Computes whether this product has a brand
@@ -202,7 +213,9 @@ module Spree
     # @return [String] the availability status of the product.
     #   One of `in stock`, `out of stock`.
     def availability
-      @product.stock_items.any?(&:available?) ? 'in stock' : 'out of stock'
+      @availability ||= @product.stock_items.any?(&:available?) ? 'in stock' : 'out of stock'
+      raise SchemaError.new("availability", @product) unless @availability.present?
+      @availability
     end
 
     # Returns the most frequently used tax rate for this item. If no tax rate
@@ -220,11 +233,12 @@ module Spree
       @tax_rate ||=
         if rates.present?
           tr_id = rates.count.map(&:flatten).sort_by { |id, count| -count }.first.first
-          Spree::TaxRate.find(tr_id)
+          Spree::TaxRate.find(tr_id).amount * 100.0
         else
-          @product.master.tax_rates.first
+          @product.master.tax_rates.first.amount * 100.0
         end
-      @tax_rate.amount * 100.0
+      raise SchemaError.new("tax rate", @product) unless @tax_rate.present?
+      @tax_rate
     end
 
     # Computes whether or not a product property for brand is present.
