@@ -204,18 +204,20 @@ RSpec.describe Spree::FeedProductPresenter do
     let!(:tax_rate_2) { create :tax_rate, tax_category: product.tax_category,
                        amount: 0.5 }
     context "when there are tax rates on line items for this product" do
+      let(:order) { create :order }
       let(:line_item_rate_1) { create :line_item, product: product,
                                 variant: product.master }
 
       let(:line_items_rate_2) { create_list :line_item, 3, product: product,
                                 variant: product.master }
 
-      let!(:adjustment_1) { create :tax_adjustment, adjustable: line_item_rate_1,
-                           source: tax_rate_1 }
+      let!(:adjustment_1) { create :tax_adjustment, order: order,
+                            adjustable: line_item_rate_1, source: tax_rate_1 }
 
       let!(:adjustment_2) {
         line_items_rate_2.map do |line_item_rate_2|
-          create :tax_adjustment, adjustable: line_item_rate_2, source: tax_rate_2
+          create :tax_adjustment, order: order, adjustable: line_item_rate_2,
+            source: tax_rate_2
         end
       }
 
