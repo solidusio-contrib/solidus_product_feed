@@ -228,7 +228,7 @@ module Spree
         "ON spree_adjustments.adjustable_id = spree_line_items.id "\
         "AND spree_adjustments.adjustable_type = 'Spree::LineItem'")
         .where("spree_line_items.variant_id = ?", @product.master.id)
-        .group(:id)
+        .group("spree_tax_rates.id")
 
       @tax_rate ||=
         if rates.present?
