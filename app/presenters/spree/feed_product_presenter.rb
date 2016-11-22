@@ -195,7 +195,7 @@ module Spree
     # @return [String] the product condition.
     def condition
       @condition ||=
-        Rails.configuration.try(:base_product_condition) || @product.property('condition')
+        Rails.configuration.try(:base_product_condition) || @product.property('condition') || 'new'
       raise SchemaError.new("condition", @product) unless @condition.present?
       @condition
     end
