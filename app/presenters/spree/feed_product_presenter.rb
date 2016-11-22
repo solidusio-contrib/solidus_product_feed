@@ -32,14 +32,14 @@ module Spree
       @product = product
       @schema = [
         :id, :title, :description, :image_link, :price, :availability,
-        :identifier_exists, :link,
+        :identifier_exists, :link, :condition,
         {parent: :shipping, schema: [:price]},
         {parent: :tax, schema: [:rate]},
       ]
 
       # Automatically include any product_property which defines
       # values for any of the following:
-      @properties = [:brand, :gtin, :mpn, :google_product_category, :condition,
+      @properties = [:brand, :gtin, :mpn, :google_product_category,
                      :adult, :multipack, :is_bundle, :energy_efficiency_class,
                      :age_group, :color, :gender, :material, :pattern, :size,
                      :size_type, :size_system, :item_group_id, :product_type,
@@ -110,7 +110,7 @@ module Spree
           @xml.tag! type, content unless validate_only
         else
           if validate_only
-            draw(**entry)
+            draw(**entry, validate_only: true)
           else
             @xml.tag! "g:#{entry[:parent]}" do
               draw(**entry)
@@ -190,6 +190,21 @@ module Spree
       @description ||= @product.description
       raise SchemaError.new("description", @product) unless @description.present?
       @description
+    end
+
+    # Returns the configured basic condition for products, or
+    # this products condition via product.property.
+    #
+    # @return [String] the product condition.
+    def condition
+      @condition ||=
+        if bcdn = Rails.configuration.try(:base_product_condition)
+          bcdn
+        else
+          @product.property('condition')
+        end
+      raise SchemaError.new("condition", @product) unless @condition.present?
+      @condition
     end
 
     # Computes whether this product has a brand
