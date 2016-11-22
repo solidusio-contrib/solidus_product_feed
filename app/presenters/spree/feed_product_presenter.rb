@@ -1,12 +1,11 @@
 module Spree
   class SchemaError < StandardError
     def initialize msg, product
-      super("Missing mandatory #{msg}. Skipping feed entry for #{product}")
+      super("Missing mandatory #{msg}. Skipping feed entry for #{product.inspect}")
     end
   end
 
   class FeedProductPresenter
-    require 'logger'
     # @!attribute schema
     #   @return [Array <Symbol, Hash>] the nested schema to use in xml generation
     #
@@ -26,8 +25,6 @@ module Spree
     #   obtained from the product.properties
     def initialize(view, product, properties: nil)
 
-      @logger = Logger.new(Rails.configuration.try(:log_file) || STDERR)
-      @logger.level = Logger::WARN
       @view = view
       @product = product
       @schema = [
@@ -70,7 +67,7 @@ module Spree
       valid = begin
                 draw(schema: schema, parent: nil, validate_only: true)
               rescue SchemaError => e
-                @logger.warn { e.message }
+                SolidusProductFeed.logger.warn { e.message }
                 false
               end
 
