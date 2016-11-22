@@ -28,6 +28,22 @@ Installation
 
 3) BOOOM, you're done
 
+
+Configurable Options
+===============
+
+There are several configurable options for a default shipping rate, a default product condition, and an output for the logger.
+
+## Shipping Rate
+This is configurable with a floating-point under `config.base_shipping_price`. No default provided.
+
+## Product Condition
+Configurable with one of `'new'`, `'used'`, `'refurbished'`. Set under `config.base_product_condition`. Defaults to `'new'`
+
+## Logger Output
+Configurable with either `STDERR`, or, the full path of the to log message in. Defaults to `<rails_root>/log/<environment>.log`
+
+
 Viewing Product RSS
 ============
 
