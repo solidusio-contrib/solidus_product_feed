@@ -68,7 +68,7 @@ RSpec.describe Spree::FeedProductPresenter do
       before do
         Spree::Image.create! viewable: product.master, attachment_file_name: 'hams.png'
       end
-      it { is_expected.to eq '/spree/products/1/large/hams.png' }
+      it { is_expected.to eq product.master.images.first.attachment(:large) }
     end
 
     context "when the product doesn't have images" do
@@ -82,7 +82,7 @@ RSpec.describe Spree::FeedProductPresenter do
           Spree::Image.create! viewable: variant, attachment_file_name: 'hams.png'
         end
 
-        it { is_expected.to eq '/spree/products/1/large/hams.png' }
+        it { is_expected.to eq variant.images.first.attachment(:large) }
       end
     end
   end
