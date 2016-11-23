@@ -64,7 +64,7 @@ RSpec.describe Spree::FeedProductPresenter do
 
   describe "#image_link" do
     subject { feed_product.send :image_link }
-    context "when the product has images" do
+    context "when the master variant has images" do
       before do
         Spree::Image.create! viewable: product.master, attachment_file_name: 'hams.png'
       end
@@ -74,6 +74,15 @@ RSpec.describe Spree::FeedProductPresenter do
     context "when the product doesn't have images" do
       it "raises a schema error" do
         expect { subject }.to raise_error(Spree::SchemaError)
+      end
+      context "but the non-master variants have images" do
+        let!(:variant) { create(:variant, product: product) }
+
+        before do
+          Spree::Image.create! viewable: variant, attachment_file_name: 'hams.png'
+        end
+
+        it { is_expected.to eq '/spree/products/1/large/hams.png' }
       end
     end
   end

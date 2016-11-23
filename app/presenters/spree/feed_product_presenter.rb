@@ -212,8 +212,9 @@ module Spree
     #
     # @return [String, nil] a URL of an image of the product
     def image_link
-      raise SchemaError.new("image link", @product) unless @product.images.any?
-      @image_link ||= @product.images.first.attachment.url(:large)
+      @images ||= @product.images.any? ? @product.images : @product.variants.flat_map { |v| v.images }
+      raise SchemaError.new("image link", @product) unless @images.length > 0
+      @image_link ||= @images.first.attachment.url(:large)
       @image_link
     end
 
