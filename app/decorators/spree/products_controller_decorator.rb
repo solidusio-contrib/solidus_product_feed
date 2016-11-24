@@ -1,0 +1,1 @@
+Spree::ProductsController.prepend(SolidusProductFeed::LoadFeedProductsConcern)
