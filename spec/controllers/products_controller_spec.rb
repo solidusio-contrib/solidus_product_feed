@@ -4,7 +4,7 @@ describe Spree::ProductsController, type: :controller do
   render_views
 
   context "GET #index" do
-    subject { spree_get :index, format: 'rss' }
+    subject { get :index, format: 'rss' }
 
     let!(:product) { create :product, name: "2 Hams", price: 20.00 }
 
