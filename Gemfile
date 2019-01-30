@@ -1,28 +1,28 @@
 source "https://rubygems.org"
 
 branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
-gem "solidus", github: "solidusio/solidus", branch: branch
+gem 'solidus', github: 'solidusio/solidus', branch: branch
 gem 'solidus_auth_devise'
 gem 'deface'
 
-if branch == 'master' || branch >= "v2.0"
-  gem 'rails-controller-testing', group: :test
+if ENV['DB'] == 'mysql'
+  gem 'mysql2', '~> 0.4.10'
 else
-  gem "rails", "~> 4.2.7"
-  gem "rails_test_params_backport", group: :test
+  gem 'pg', '~> 0.21'
 end
 
-gem 'pg', '~> 0.21'
-gem 'mysql2', '~> 0.4.10'
+group :test do
+  gem 'rails-controller-testing'
 
-if branch < "v2.5"
-  gem 'factory_bot', '4.10.0', group: :test
-else
-  gem 'factory_bot', '> 4.10.0', group: :test
+  if branch < 'v2.5'
+    gem 'factory_bot', '4.10.0'
+  else
+    gem 'factory_bot', '> 4.10.0'
+  end
 end
 
 group :development, :test do
-  gem "pry-rails"
+  gem 'pry-rails'
 end
 
 gemspec
