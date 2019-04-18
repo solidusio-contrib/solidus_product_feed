@@ -13,6 +13,6 @@ Spree::ProductsController.prepend(Module.new do
   private
 
   def load_feed_products
-    @feed_products = Spree::Product.all.map(&Spree::FeedProduct.method(:new))
+    @feed_products = Spree::Product.all.map(&SolidusProductFeed.feed_product_class.method(:new))
   end
 end)
