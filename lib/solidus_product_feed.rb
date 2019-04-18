@@ -3,7 +3,7 @@ require 'solidus_product_feed/engine'
 
 module SolidusProductFeed
   class << self
-    attr_writer :title, :link, :description, :language
+    attr_writer :title, :link, :description, :language, :feed_product_class
 
     def configure
       yield self
@@ -27,6 +27,10 @@ module SolidusProductFeed
 
     def language
       @language ||= 'en-us'
+    end
+
+    def feed_product_class
+      (@feed_product_class ||= 'Spree::FeedProduct').constantize
     end
   end
 end
