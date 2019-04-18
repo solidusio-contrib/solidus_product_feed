@@ -28,7 +28,7 @@ RSpec.describe Spree::FeedProduct do
 
   describe "#price" do
     subject { feed_product.price }
-    it { is_expected.to eq Spree::Money.new(19.99, currency: 'USD') }
+    it { is_expected.to eq '19.99 USD' }
   end
 
   describe "#image_link" do
