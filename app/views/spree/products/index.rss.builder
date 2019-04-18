@@ -2,10 +2,10 @@ xml.instruct! :xml, version: "1.0"
 
 xml.rss version: "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
   xml.channel do
-    xml.title current_store.name
-    xml.link "http://#{current_store.url}"
-    xml.description "Find out about new products on http://#{current_store.url} first!"
-    xml.language 'en-us'
+    xml.title SolidusProductFeed.evaluate(SolidusProductFeed.title, self)
+    xml.link SolidusProductFeed.evaluate(SolidusProductFeed.link, self)
+    xml.description SolidusProductFeed.evaluate(SolidusProductFeed.description, self)
+    xml.language SolidusProductFeed.evaluate(SolidusProductFeed.language, self)
 
     @feed_products.each do |feed_product|
       xml.item do
