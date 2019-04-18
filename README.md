@@ -31,6 +31,32 @@ $ bundle install
 
 You're done! You can now see your RSS feed at `/products.rss`.
 
+## Usage
+
+The RSS feed is configured wih some sensible defaults, but you can easily change them by putting
+the following in your Rails initializer:
+
+```ruby
+SolidusProductFeed.configure do |config|
+  config.title = 'My Awesome Store'
+  config.link = 'https://www.awesomestore.com'
+  config.description = 'Find out about new products on https://www.awesomestore.com first!'
+  config.language = 'en-us'
+end
+```
+
+Note that you can also pass a Proc for each of these options. The Proc will be passed the view
+context as its only argument, so that you can use any helpers:
+
+```ruby
+SolidusProductFeed.configure do |config|
+  config.title = -> (view) { view.current_store.name }
+  config.link = -> (view) { "http://#{view.current_store.url}" }
+  config.description = -> (view) { "Find out about new products on http://#{view.current_store.url} first!" }
+  config.language = -> (view) { view.lang_from_store(current_store.language) }
+end
+```
+
 ## Testing
 
 Be sure to add the `rspec-rails` gem to your Gemfile and then create a dummy test app for the specs 
