@@ -1,8 +1,8 @@
-sudo: false
+dist: trusty
 cache: bundler
 language: ruby
 rvm:
-  - 2.3.1
+  - 2.5.1
 env:
   matrix:
     - SOLIDUS_BRANCH=v2.2 DB=postgres
@@ -11,6 +11,7 @@ env:
     - SOLIDUS_BRANCH=v2.5 DB=postgres
     - SOLIDUS_BRANCH=v2.6 DB=postgres
     - SOLIDUS_BRANCH=v2.7 DB=postgres
+    - SOLIDUS_BRANCH=v2.8 DB=postgres
     - SOLIDUS_BRANCH=master DB=postgres
     - SOLIDUS_BRANCH=v2.2 DB=mysql
     - SOLIDUS_BRANCH=v2.3 DB=mysql
@@ -18,4 +19,5 @@ env:
     - SOLIDUS_BRANCH=v2.5 DB=mysql
     - SOLIDUS_BRANCH=v2.6 DB=mysql
     - SOLIDUS_BRANCH=v2.7 DB=mysql
+    - SOLIDUS_BRANCH=v2.8 DB=mysql
     - SOLIDUS_BRANCH=master DB=mysql
