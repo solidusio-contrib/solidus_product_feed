@@ -2,7 +2,7 @@ dist: trusty
 cache: bundler
 language: ruby
 rvm:
-  - 2.5.1
+  - 2.6.3
 env:
   matrix:
     - SOLIDUS_BRANCH=v2.5 DB=postgres
