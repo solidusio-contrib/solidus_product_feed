@@ -14,7 +14,7 @@ describe Spree::ProductsController, type: :controller do
 
     it 'returns the correct content type' do
       subject
-      expect(response.content_type).to eq 'application/rss+xml'
+      expect(response.content_type.split(';').first).to eq 'application/rss+xml'
     end
   end
 end
