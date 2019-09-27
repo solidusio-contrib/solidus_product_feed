@@ -15,9 +15,9 @@ group :test do
   gem 'rails-controller-testing'
 
   if branch < 'v2.5'
-    gem 'factory_bot', '4.10.0'
+    gem 'factory_bot', '5.1.0'
   else
-    gem 'factory_bot', '> 4.10.0'
+    gem 'factory_bot', '5.1.0'
   end
 end
 
