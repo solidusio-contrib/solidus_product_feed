@@ -5,6 +5,7 @@ module SolidusProductFeed
     module ProductsControllerDecorator
       def self.prepended(klass)
         klass.respond_to :rss, only: :index
+        klass.before_action :verify_requested_format!, only: :index
       end
 
       def index
