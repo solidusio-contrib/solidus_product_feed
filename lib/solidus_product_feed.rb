@@ -1,4 +1,5 @@
 require 'spree_core'
+require 'deface'
 require 'solidus_product_feed/engine'
 
 module SolidusProductFeed
