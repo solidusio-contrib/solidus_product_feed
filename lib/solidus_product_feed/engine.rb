@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusProductFeed
   class Engine < Rails::Engine
     engine_name 'solidus_product_feed'

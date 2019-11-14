@@ -1,5 +1,6 @@
-# encoding: UTF-8
-lib = File.expand_path('../lib/', __FILE__)
+# frozen_string_literal: true
+
+lib = File.expand_path('lib', __dir__)
 $:.unshift lib unless $:.include?(lib)
 
 require 'solidus_product_feed/version'
@@ -20,12 +21,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
+  s.add_runtime_dependency 'deface'
   s.add_runtime_dependency 'solidus_backend', [">= 1.0", "< 3"]
 
-  s.add_development_dependency 'rspec-rails', '~> 3.4'
-  s.add_development_dependency 'rubocop', '~> 0.49.0'
-  s.add_development_dependency 'factory_bot_rails'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'solidus_extension_dev_tools'
 end

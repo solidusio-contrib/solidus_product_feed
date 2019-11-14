@@ -1,17 +1,11 @@
-# Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
-require File.expand_path("../dummy/config/environment.rb", __FILE__)
-require 'rspec/rails'
-require 'factory_bot_rails'
-require 'pry'
-require 'ffaker' # Required for factories.
-require 'spree/testing_support/factories'
-require 'spree/testing_support/controller_requests'
+# frozen_string_literal: true
 
-RSpec.configure do |config|
-  config.mock_with :rspec
-  config.use_transactional_fixtures = true
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Spree::TestingSupport::ControllerRequests, type: :controller
-  config.include FactoryBot::Syntax::Methods
-end
+ENV['RAILS_ENV'] ||= 'test'
+
+require 'solidus_extension_dev_tools/rspec/coverage'
+
+require File.expand_path('dummy/config/environment.rb', __dir__)
+
+require 'solidus_extension_dev_tools/rspec/feature_helper'
+
+Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
