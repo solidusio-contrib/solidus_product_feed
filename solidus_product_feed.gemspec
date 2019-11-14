@@ -20,11 +20,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
+  s.add_runtime_dependency 'deface'
   s.add_runtime_dependency 'solidus_backend', [">= 1.0", "< 3"]
 
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rubocop', '~> 0.49.0'
-  s.add_development_dependency 'factory_bot_rails'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'ffaker'
+  s.add_development_dependency 'solidus_extension_dev_tools'
 end
