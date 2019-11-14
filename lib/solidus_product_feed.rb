@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spree_core'
 require 'deface'
 require 'solidus_product_feed/engine'
@@ -15,15 +17,15 @@ module SolidusProductFeed
     end
 
     def title
-      @title ||= -> (view) { view.current_store.name }
+      @title ||= ->(view) { view.current_store.name }
     end
 
     def link
-      @link ||= -> (view) { "http://#{view.current_store.url}" }
+      @link ||= ->(view) { "http://#{view.current_store.url}" }
     end
 
     def description
-      @description ||= -> (view) { "Find out about new products on http://#{view.current_store.url} first!" }
+      @description ||= ->(view) { "Find out about new products on http://#{view.current_store.url} first!" }
     end
 
     def language

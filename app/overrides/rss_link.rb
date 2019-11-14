@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Deface::Override.new(virtual_path: 'layouts/spree_application',
                      name: 'product_rss_link',
                      original: '86987c7feaaea3181df195ca520571d801bbbaf3',

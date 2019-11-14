@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class FeedProduct
     attr_reader :product
@@ -22,20 +24,16 @@ module Spree
       }
     end
 
-    def id
-      product.id
-    end
+    delegate :id, to: :product
 
     def title
       product.name
     end
 
-    def description
-      product.description
-    end
+    delegate :description, to: :product
 
     def link
-      -> (view) { view.product_url(product) }
+      ->(view) { view.product_url(product) }
     end
 
     def image_link
