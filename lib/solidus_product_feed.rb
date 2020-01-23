@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-require 'spree_core'
-require 'deface'
+require 'solidus_core'
+require 'solidus_support'
+
+require 'solidus_product_feed/version'
 require 'solidus_product_feed/engine'
+
+require 'deface'
 
 module SolidusProductFeed
   class << self
