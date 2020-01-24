@@ -1,0 +1,5 @@
+bump:
+  recurse: false
+  file: 'lib/solidus_product_feed/version.rb'
+  message: Bump SolidusProductFeed to %{version}
+  tag: true

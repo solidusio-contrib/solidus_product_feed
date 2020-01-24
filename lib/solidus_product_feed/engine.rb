@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
+require 'spree/core'
+
 module SolidusProductFeed
   class Engine < Rails::Engine
-    engine_name 'solidus_product_feed'
+    include SolidusSupport::EngineExtensions::Decorators
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    isolate_namespace ::Spree
+
+    engine_name 'solidus_product_feed'
 
     # use rspec for tests
     config.generators do |g|
