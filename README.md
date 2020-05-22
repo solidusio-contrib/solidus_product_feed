@@ -6,15 +6,6 @@ An extension that provides an RSS feed for products. Google Merchant Feed attrib
 implemented. An RSS link is automatically appended to the `<head>` tag in the
 `layouts/spree_application` file.
 
-## Note on Versions
-
-The master branch tracks the 1.0 version of this gem, which has some major changes from its
-predecessor `spree_product_feed`. The 1.0 version is cleaner, more extensible, and more correct at 
-the expense of compatibility.
-
-We also have a [`~> 0.1.0` version](https://github.com/solidusio-contrib/solidus_product_feed/tree/v0.1) 
-which is a direct port of `spree_product_feed` with minimal changes.
-
 ## Installation
 
 Add the gem to your `Gemfile`:
@@ -96,5 +87,3 @@ to run against.
 $ bundle exec rake test app
 $ bundle exec rspec spec
 ```
-
-Copyright (c) 2011 Joshua Nussbaum, released under the New BSD License
