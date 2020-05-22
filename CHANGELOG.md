@@ -18,6 +18,7 @@
 
 **Merged pull requests:**
 
+- Update gem to the latest version of solidus\_dev\_support [\#55](https://github.com/solidusio-contrib/solidus_product_feed/pull/55) ([aldesantis](https://github.com/aldesantis))
 - Relax solidus\_support dependency [\#53](https://github.com/solidusio-contrib/solidus_product_feed/pull/53) ([kennyadsl](https://github.com/kennyadsl))
 - Fix Dependabot looking for Gemfile-local [\#51](https://github.com/solidusio-contrib/solidus_product_feed/pull/51) ([aldesantis](https://github.com/aldesantis))
 - Upgrade the extension using solidus\_dev\_support [\#48](https://github.com/solidusio-contrib/solidus_product_feed/pull/48) ([blocknotes](https://github.com/blocknotes))
