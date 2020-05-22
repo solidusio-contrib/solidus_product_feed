@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/solidusio-contrib/solidus_product_feed/tree/HEAD)
+## [v1.1.0](https://github.com/solidusio-contrib/solidus_product_feed/tree/v1.1.0) (2020-05-22)
 
-[Full Changelog](https://github.com/solidusio-contrib/solidus_product_feed/compare/v1.0.0...HEAD)
+[Full Changelog](https://github.com/solidusio-contrib/solidus_product_feed/compare/v1.0.0...v1.1.0)
 
 **Closed issues:**
 
