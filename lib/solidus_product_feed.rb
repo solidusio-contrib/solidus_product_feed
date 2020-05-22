@@ -6,8 +6,6 @@ require 'solidus_support'
 require 'solidus_product_feed/version'
 require 'solidus_product_feed/engine'
 
-require 'deface'
-
 module SolidusProductFeed
   class << self
     attr_writer :title, :link, :description, :language, :feed_product_class
