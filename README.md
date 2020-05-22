@@ -3,8 +3,7 @@
 [![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_product_feed.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_product_feed)
 
 An extension that provides an RSS feed for products. Google Merchant Feed attributes are also
-implemented. An RSS link is automatically appended to the `<head>` tag in the
-`layouts/spree_application` file.
+implemented.
 
 ## Installation
 
@@ -77,6 +76,15 @@ end
 If you want to change the value of an existing tag, you can also simply override the corresponding
 tag method (`link`, `price` etc.). Check the [source code](https://github.com/solidusio-contrib/solidus_product_feed/blob/master/app/models/spree/feed_product.rb)
 for more details. 
+
+### Making your feed discoverable
+
+If you want to make your feed discoverable when visiting your store, simply add the following to
+your storefront's `head`:
+
+```html
+<%= auto_discovery_link_tag(:rss, products_path(format: :rss), title: "My Store's Products") %>
+```
 
 ## Testing
 
