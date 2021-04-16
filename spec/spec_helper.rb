@@ -24,4 +24,8 @@ SolidusDevSupport::TestingSupport::Factories.load_for(SolidusProductFeed::Engine
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
+
+  config.before :each do
+    ActiveStorage::Current.host = 'https://www.example.com'
+  end
 end

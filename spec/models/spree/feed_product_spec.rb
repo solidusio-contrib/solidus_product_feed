@@ -40,9 +40,17 @@ RSpec.describe Spree::FeedProduct do
     subject { feed_product.image_link }
 
     context "when the product has images" do
-      before { Spree::Image.create! viewable: product.master, attachment_file_name: 'hams.png' }
+      it "is generated correctly" do
+        first_version_with_blank_image = Gem::Requirement.new('>= 2.11')
+        file = if first_version_with_blank_image.satisfied_by?(Spree.solidus_gem_version)
+          File.open(Spree::Core::Engine.root.join('lib', 'spree', 'testing_support', 'fixtures', "blank.jpg"))
+        else
+          File.open(Spree::Api::Engine.root.join('spec', 'fixtures', 'thinking-cat.jpg'))
+        end
+        Spree::Image.create! viewable: product.master, attachment: file
 
-      it { is_expected.to eq '/spree/products/1/large/hams.png' }
+        expect(subject).to include File.basename(file)
+      end
     end
 
     context "when the product doesn't have images" do
