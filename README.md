@@ -1,5 +1,11 @@
 # Solidus Product Feed
 
+
+# 🚧 Archived
+
+This repo is no longer maintained. Please use the new extension at [solidusio-contrib/solidus_feeds](https://github.com/solidusio-contrib/solidus_feeds).
+
+
 [![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_product_feed.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_product_feed)
 
 An extension that provides an RSS feed for products. Google Merchant Feed attributes are also
